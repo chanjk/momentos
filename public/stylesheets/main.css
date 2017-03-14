@@ -26,3 +26,8 @@ body {
   position: absolute;
   z-index: 1000;
 }
+
+.required::after {
+  content: " (required)";
+  color: red;
+}

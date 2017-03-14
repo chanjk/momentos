@@ -31,6 +31,10 @@ get '/' do
   erb :index
 end
 
+get '/albums/new' do
+  erb :album_new
+end
+
 get '/users/:id' do
   @owner = User.find(params[:id])
   erb :account
@@ -51,9 +55,20 @@ post '/session' do
 
   if user && user.authenticate(params[:password])
     session[:user_id] = user.id
-    redirect "/users/#{user.id}"
+    # redirect "/users/#{user.id}"
+    redirect back
   else
     redirect '/'
+  end
+end
+
+post '/albums' do
+  album = Album.new(name: params[:name], description: params[:description], user_id: current_user.id)
+
+  if album.save
+    redirect "/users/#{current_user.id}"
+  else
+    erb :album_new
   end
 end
 

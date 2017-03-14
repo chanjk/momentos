@@ -1,0 +1,12 @@
+<h1>Create a new album</h1>
+<% if !logged_in? %>
+<div class="alert alert-danger" role="alert">Please log in to create an album.</div>
+<% else %>
+<form class="form-group" action="/albums" method="post">
+  <label class="required" for="">Name</label>
+  <input class="form-control" type="text" name="name" placeholder="Album name" required>
+  <label for="">Description</label>
+  <input class="form-control" type="text" name="description" placeholder="Album description">
+  <button class="btn btn-primary pull-right">Create album</button>
+</form>
+<% end %>

@@ -1,17 +1,23 @@
 <% if current_user?(@owner) %>
 <h1>Welcome <%= @owner.username %>!</h1>
 <h2>You are currently sharing <%= "#{count = @owner.albums.count} #{if count == 1 then "album" else "albums" end}" %></h2>
-<button>Create album</button>
-<button>New photo</button>
+<a class="btn btn-default" role="button">Create album</a>
+<a class="btn btn-default" role="button">New photo</a>
 <% else %>
 <h1>You are viewing <%= @owner.username %>'s albums<h1>
 <% end %>
 
-<% @owner.albums.each do |album| %>
 <div class="row">
+<% @owner.albums.each do |album| %>
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img src="<%= album.photos.first && album.photos.first.url %>" alt="">
+      <% if album.photos.first %>
+      <img src="<%= album.photos.first.url %>" alt="">
+      <% else %>
+      <div class="alert alert-info" role="alert">
+        This album is a little empty. Add some photos to spice it up!
+      </div>
+      <% end %>
       <div class="caption">
         <h3><%= album.name %></h3>
         <h4><%= album.description %></h4>
@@ -22,5 +28,5 @@
       </div>
     </div>
   </div>
+  <% end %>
 </div>
-<% end %>

@@ -2,21 +2,18 @@ CREATE TABLE users (
   id SERIAL4 PRIMARY KEY,
   email VARCHAR(254) NOT NULL,
   password_digest VARCHAR(400) NOT NULL,
-  full_name VARCHAR(255),
-  deleted BOOLEAN NOT NULL
+  full_name VARCHAR(255)
 );
 
 CREATE TABLE albums (
   id SERIAL4 PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   description TEXT,
-  user_id INTEGER NOT NULL,
-  deleted BOOLEAN NOT NULL
+  user_id INTEGER NOT NULL
 );
 
 CREATE TABLE photos (
   id SERIAL4 PRIMARY KEY,
   url VARCHAR(400) NOT NULL,
-  album_id INTEGER NOT NULL,
-  deleted BOOLEAN NOT NULL
+  album_id INTEGER NOT NULL
 );
