@@ -1,0 +1,22 @@
+html {
+  width: 100%;
+}
+
+body {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.page-header, .search, .login-register {
+  display: inline-block;
+}
+
+input {
+  display: block;
+}
+
+.overlay {
+  background: #e4e4e4;
+  position: absolute;
+  z-index: 1000;
+}

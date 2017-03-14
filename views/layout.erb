@@ -2,23 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Momentos</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel='stylesheet' href='/stylesheets/main.css'>
 </head>
 <body>
   <header>
-    <h1>Momentos</h1>
-    <h2>Simple photo-sharing</h2>
-    <form class="" action="index.html" method="post">
-      <input type="text" name="" value="" placeholder="Search for user or album...">
-      <button>Go!</button>
+    <div class="h1 page-header">Momentos <small>Simple photo-sharing</small></div>
+    <form class="search navbar-form" action="index.html" method="post">
+      <div class="input-group">
+        <input type="text" class="form-control" name="" placeholder="Search for user or album...">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-default">Search</button>
+        </span>
+      </div>
     </form>
-    <button>Log in</button>
-    <button>Register</button>
-    <span>Julian</span>
+
+    <% if !logged_in? %>
+    <div class="login-register panel-group" id="accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" href="#login">Log in</a>
+            <a class="btn btn-default" data-toggle="collapse" data-parent="#accordion" href="#register">Register</a>
+          </h4>
+        </div>
+        <div id="login" class="panel-collapse collapse overlay">
+          <div class="panel-body">
+            <form class="" action="/users" method="post">
+              <input type="text" name="email" placeholder="Email address">
+              <input type="password" name="password" placeholder="Password">
+              <button>Log in</button>
+            </form>
+          </div>
+        </div>
+        <div id="register" class="panel-collapse collapse overlay">
+          <div class="panel-body">
+            <form class="" action="index.html" method="post">
+              <input type="text" name="" value="" placeholder="Full name">
+              <input type="text" name="" value="" placeholder="Email address">
+              <input type="password" name="" value="" placeholder="Password">
+              <button>Register</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% else %>
+    <span><%= User.find(session[:user_id]).email %></span>
     <button>Log out</button>
+    <% end %>
   </header>
 
   <%= yield %>
 
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
