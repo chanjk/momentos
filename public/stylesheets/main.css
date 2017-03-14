@@ -7,12 +7,18 @@ body {
   margin: 0 auto;
 }
 
-.inline-block {
-  display: inline-block;
+.photo-container img {
+  margin-bottom: 1em;
 }
 
-input {
-  display: block;
+@media (min-width: 768px) {
+  .photo-container img {
+    margin-bottom: 0;
+  }
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .overlay {

@@ -3,4 +3,8 @@ class User < ActiveRecord::Base
   validates :deleted, inclusion: { in: [true, false] }
   has_secure_password
   has_many :albums
+
+  def username
+    full_name || email
+  end
 end

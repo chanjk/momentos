@@ -1,10 +1,13 @@
-<h1>Album</h1>
+<h1><%= @album.name %><%= " <small>by <a href=\"/users/#{@album.user.id}\">#{@album.user.username}</a></small>" if !current_user?(@album.user) %></h1>
+<h4><%= @album.description %></h4>
+
+<% if current_user?(@album.user) %>
 <button>Add photo</button>
 <button>Edit</button>
+<% end %>
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Kitten_in_Rizal_Park%2C_Manila.jpg/230px-Kitten_in_Rizal_Park%2C_Manila.jpg" alt="">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Kitten_in_Rizal_Park%2C_Manila.jpg/230px-Kitten_in_Rizal_Park%2C_Manila.jpg" alt="">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Kitten_in_Rizal_Park%2C_Manila.jpg/230px-Kitten_in_Rizal_Park%2C_Manila.jpg" alt="">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Kitten_in_Rizal_Park%2C_Manila.jpg/230px-Kitten_in_Rizal_Park%2C_Manila.jpg" alt="">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Kitten_in_Rizal_Park%2C_Manila.jpg/230px-Kitten_in_Rizal_Park%2C_Manila.jpg" alt="">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Kitten_in_Rizal_Park%2C_Manila.jpg/230px-Kitten_in_Rizal_Park%2C_Manila.jpg" alt="">
+<div class="photo-container">
+  <% @album.photos.each do |photo| %>
+  <a href="/photos/<%= photo.id %>"><img class="img-responsive col-md-4 col-xs" src=<%= photo.url %> alt=""></a>
+  <% end %>
+</div>
