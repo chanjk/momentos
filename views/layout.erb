@@ -9,8 +9,8 @@
 </head>
 <body>
   <header>
-    <div class="h1 page-header">Momentos <small>Simple photo-sharing</small></div>
-    <form class="search navbar-form" action="index.html" method="post">
+    <div class="h1 inline-block page-header">Momentos <small>Simple photo-sharing</small></div>
+    <form class="inline-block navbar-form" action="index.html" method="post">
       <div class="input-group">
         <input type="text" class="form-control" name="" placeholder="Search for user or album...">
         <span class="input-group-btn">
@@ -20,7 +20,7 @@
     </form>
 
     <% if !logged_in? %>
-    <div class="login-register panel-group" id="accordion">
+    <div class="inline-block panel-group" id="accordion">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
@@ -30,7 +30,7 @@
         </div>
         <div id="login" class="panel-collapse collapse overlay">
           <div class="panel-body">
-            <form class="" action="/users" method="post">
+            <form class="" action="/session" method="post">
               <input type="text" name="email" placeholder="Email address">
               <input type="password" name="password" placeholder="Password">
               <button>Log in</button>
@@ -51,7 +51,10 @@
     </div>
     <% else %>
     <span><%= User.find(session[:user_id]).email %></span>
-    <button>Log out</button>
+    <form class="inline-block" action="/session" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button>Log out</button>
+    </form>
     <% end %>
   </header>
 

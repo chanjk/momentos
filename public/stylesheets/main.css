@@ -7,7 +7,7 @@ body {
   margin: 0 auto;
 }
 
-.page-header, .search, .login-register {
+.inline-block {
   display: inline-block;
 }
 

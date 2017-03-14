@@ -1,3 +1,4 @@
+require 'pry'
 require 'sinatra'
 require 'sinatra/reloader'
 
@@ -38,7 +39,7 @@ get '/photos/:id' do
   erb :photo
 end
 
-post '/users' do
+post '/session' do
   user = User.find_by(email: params[:email])
 
   if user && user.authenticate(params[:password])
@@ -47,4 +48,9 @@ post '/users' do
   else
     redirect '/'
   end
+end
+
+delete '/session' do
+  session[:user_id] = nil
+  redirect '/'
 end
