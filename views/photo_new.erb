@@ -1,0 +1,78 @@
+<h1>Add a new photo</h1>
+<% if !logged_in? %>
+<div class="alert alert-danger" role="alert">Please log in to add a new photo.</div>
+<% else %>
+<form id="form-add-photo" class="form-group">
+  <div class="panel-group" id="add-photo-accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <div class="radio">
+            <label for=""><input type="radio" name="method" data-toggle="collapse" data-parent="#add-photo-accordion" data-target="#add-from-url" checked>Photo URL</label>
+          </div>
+        </h4>
+      </div>
+      <div id="add-from-url" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <input class="form-control" type="text" name="name" placeholder="Photo URL">
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <div class="radio">
+            <label for=""><input type="radio" name="method" data-toggle="collapse" data-parent="#add-photo-accordion" data-target="#add-from-device">Upload from device</label>
+          </div>
+        </h4>
+      </div>
+      <div id="add-from-device" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="input-group">
+            <input type="text" class="form-control" name="" placeholder="Path to photo...">
+            <span class="input-group-btn">
+              <button class="btn btn-info">Browse</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Choose album</h3>
+  <div class="panel-group" id="choose-album-accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <div class="radio">
+            <label for=""><input type="radio" name="album-opt" data-toggle="collapse" data-parent="#choose-album-accordion" data-target="#create-new" checked>Create new album</label>
+          </div>
+        </h4>
+      </div>
+      <div id="create-new" class="panel-collapse collapse"></div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <div class="radio">
+            <label for=""><input type="radio" name="album-opt" data-toggle="collapse" data-parent="#choose-album-accordion" data-target="#choose-existing">Add to existing album</label>
+          </div>
+        </h4>
+      </div>
+      <div id="choose-existing" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="input-group">
+            <input type="text" class="form-control" name="" placeholder="Path to photo...">
+            <span class="input-group-btn">
+              <button class="btn btn-info">Browse</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="btn-create-album" type="submit" class="btn btn-primary pull-right" formaction="/albums/new">Create album</button>
+  <button id="btn-add-photo" type="submit" class="btn btn-primary pull-right" formaction="/">Add photo</button>
+</form>
+<% end %>

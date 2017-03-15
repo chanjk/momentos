@@ -35,6 +35,10 @@ get '/albums/new' do
   erb :album_new
 end
 
+get '/photos/new' do
+  erb :photo_new
+end
+
 get '/users/:id' do
   @owner = User.find(params[:id])
   erb :account
@@ -70,6 +74,10 @@ post '/albums' do
   else
     erb :album_new
   end
+end
+
+post '/photos' do
+  
 end
 
 delete '/session' do

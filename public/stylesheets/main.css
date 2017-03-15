@@ -11,12 +11,6 @@ body {
   margin-bottom: 1em;
 }
 
-@media (min-width: 768px) {
-  .photo-container img {
-    margin-bottom: 0;
-  }
-}
-
 .inline-block {
   display: inline-block;
 }
@@ -30,4 +24,18 @@ body {
 .required::after {
   content: " (required)";
   color: red;
+}
+
+.panel-heading .radio {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .photo-container img {
+    margin-bottom: 0;
+  }
+}
+
+#btn-add-photo {
+  display: none;
 }

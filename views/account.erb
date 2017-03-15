@@ -1,8 +1,8 @@
 <% if current_user?(@owner) %>
 <h1>Welcome <%= @owner.username %>!</h1>
 <h2>You are currently sharing <%= "#{count = @owner.albums.count} #{if count == 1 then "album" else "albums" end}" %></h2>
-<a class="btn btn-default" role="button">Create album</a>
-<a class="btn btn-default" role="button">New photo</a>
+<a class="btn btn-default" role="button" href="/albums/new">Create album</a>
+<a class="btn btn-default" role="button" href="/photos/new">New photo</a>
 <% else %>
 <h1>You are viewing <%= @owner.username %>'s albums<h1>
 <% end %>

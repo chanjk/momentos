@@ -20,12 +20,12 @@
     </form>
 
     <% if !logged_in? %>
-    <div class="inline-block panel-group" id="accordion">
+    <div class="inline-block panel-group" id="login-register-accordion">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
-            <a class="btn btn-primary" role="button" data-toggle="collapse" data-parent="#accordion" href="#login">Log in</a>
-            <a class="btn btn-default" role="button" data-toggle="collapse" data-parent="#accordion" href="#register">Register</a>
+            <a class="btn btn-primary" role="button" data-toggle="collapse" data-parent="#login-register-accordion" href="#login">Log in</a>
+            <a class="btn btn-default" role="button" data-toggle="collapse" data-parent="#login-register-accordion" href="#register">Register</a>
           </h4>
         </div>
         <div id="login" class="panel-collapse collapse overlay">
@@ -62,4 +62,5 @@
 
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="/javascripts/application.js"></script>
 </body>
