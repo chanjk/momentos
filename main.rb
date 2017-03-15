@@ -29,6 +29,8 @@ after do
 end
 
 get '/' do
+  @register_failed = (params[:register] == "fail")
+  @reason = params[:reason] if @register_failed
   erb :index
 end
 
@@ -61,11 +63,26 @@ post '/session' do
 
   if user && user.authenticate(params[:password])
     session[:user_id] = user.id
-    # redirect "/users/#{user.id}"
-    redirect back
+    redirect "/users/#{user.id}"
   else
     redirect '/'
   end
+end
+
+post '/users' do
+  if !User.find_by(email: params[:email])
+    user = User.new(email: params[:email])
+    user.full_name = params[:full_name] unless params[:full_name].empty?
+    user.password = params[:password]
+
+    if user.save
+      redirect "/session?email=#{user.email}&password=#{user.password}", 307
+    else
+      redirect '/?register=fail&reason=error'
+    end
+  end
+
+  redirect '/?register=fail&reason=taken'
 end
 
 post '/albums' do
