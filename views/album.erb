@@ -2,8 +2,8 @@
 <h4><%= @album.description %></h4>
 
 <% if current_user?(@album.user) %>
-<button>Add photo</button>
-<button>Edit</button>
+<a class="btn btn-default" role="button" href="/photos/new?album_id=<%= @album.id %>">Add photo</a>
+<a>Edit</a>
 <% end %>
 
 <div class="photo-container">

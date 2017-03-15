@@ -37,6 +37,7 @@ get '/albums/new' do
 end
 
 get '/photos/new' do
+  @album = Album.find_by(id: params[:album_id])
   erb :photo_new
 end
 
@@ -82,8 +83,14 @@ post '/albums' do
 end
 
 post '/albums/new' do
-  cookies[:photo_url] = params[params[:method]]
-  redirect '/albums/new'
+  photo_url = params[params[:method]]
+
+  if photo_url && !photo_url.empty?
+    cookies[:photo_url] = photo_url
+    redirect '/albums/new'
+  else
+    erb :photo_new
+  end
 end
 
 post '/photos' do
@@ -103,6 +110,6 @@ post '/photos' do
 end
 
 delete '/session' do
-  session[:user_id] = nil
+  session.delete(:user_id)
   redirect '/'
 end

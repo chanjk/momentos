@@ -6,7 +6,7 @@
   <%= erb :_add_photo_accordion %>
 
   <h3>Choose album</h3>
-  <%= erb :_choose_album_accordion %>
+  <%= erb :_choose_album_accordion, locals: { current_album: @album } %>
 
   <button id="btn-create-album" type="submit" class="btn btn-primary pull-right" formaction="/albums/new">Create album</button>
   <button id="btn-add-photo" type="submit" class="btn btn-primary pull-right" formaction="/photos">Add photo</button>

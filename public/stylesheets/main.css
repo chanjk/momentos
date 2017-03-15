@@ -26,7 +26,7 @@ body {
   color: red;
 }
 
-#btn-add-photo {
+#btn-create-album, #btn-add-photo {
   display: none;
 }
 

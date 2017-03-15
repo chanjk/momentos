@@ -3,7 +3,7 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <div class="radio">
-          <label for=""><input type="radio" name="album-opt" data-toggle="collapse" data-parent="#choose-album-accordion" data-target="#create-new" checked>Create new album</label>
+          <label for=""><input type="radio" name="album-opt" data-toggle="collapse" data-parent="#choose-album-accordion" data-target="#create-new" <%= "checked" unless current_album %>>Create new album</label>
         </div>
       </h4>
     </div>
@@ -13,16 +13,16 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <div class="radio">
-          <label for=""><input type="radio" name="album-opt" data-toggle="collapse" data-parent="#choose-album-accordion" data-target="#choose-existing">Add to existing album</label>
+          <label for=""><input type="radio" name="album-opt" data-toggle="collapse" data-parent="#choose-album-accordion" data-target="#choose-existing" <%= "checked" if current_album %>>Add to existing album</label>
         </div>
       </h4>
     </div>
-    <div id="choose-existing" class="panel-collapse collapse">
+    <div id="choose-existing" class="panel-collapse collapse <%= "in" if current_album %>">
       <div class="panel-body">
         <ul class="list-group">
           <% current_user.albums.each do |album| %>
-          <li class="list-group-item row">
-            <input class="hidden" type="radio" name="album_id" value="<%= album.id %>">
+          <li class="list-group-item row <%= "active" if album == current_album %>">
+            <input class="hidden" type="radio" name="album_id" value="<%= album.id %>" <%= "checked" if album == current_album %>>
             <% if album.photos.first %>
             <img class="img-responsive col-md-2 col-xs-6" src=<%= album.photos.first.url %> alt="">
             <% end %>
