@@ -22,7 +22,7 @@
         <h3><%= album.name %></h3>
         <h4><%= album.description %></h4>
         <a class="btn btn-primary" role="button" href="/albums/<%= album.id %>">View</a>
-        <% if current_user == @owner %>
+        <% if current_user?(@owner) %>
         <a class="btn btn-default" role="button" href="#">Edit</a>
         <% end %>
       </div>

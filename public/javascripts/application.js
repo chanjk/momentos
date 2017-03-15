@@ -4,7 +4,7 @@ $('input:radio').click(function(e) {
   }
 });
 
-$('#choose-album-accordion input:radio').click(function(e) {
+$('#choose-album-accordion input:radio').click(function() {
   if ($(this).attr('data-target') === '#create-new') {
     $('#form-add-photo #btn-add-photo').hide();
     $('#form-add-photo #btn-create-album').show();
@@ -14,7 +14,7 @@ $('#choose-album-accordion input:radio').click(function(e) {
   }
 });
 
-$('#choose-existing').ready(function(e) {
+$('#choose-existing').ready(function() {
   $(this).find('li').first().addClass('active');
   $(this).find('input:radio[name="album_id"]').first().prop('checked', true);
 });

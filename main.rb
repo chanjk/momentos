@@ -1,5 +1,6 @@
 require 'pry'
 require 'sinatra'
+require 'sinatra/cookies'
 require 'sinatra/reloader'
 
 require_relative 'database_config'
@@ -70,18 +71,29 @@ post '/albums' do
   album = Album.new(name: params[:name], description: params[:description], user_id: current_user.id)
 
   if album.save
-    redirect "/users/#{current_user.id}"
+    if !cookies[:photo_url]
+      redirect "/users/#{current_user.id}"
+    else
+      redirect "/photos?album_id=#{album.id}", 307
+    end
   else
     erb :album_new
   end
 end
 
 post '/albums/new' do
-
+  cookies[:photo_url] = params[params[:method]]
+  redirect '/albums/new'
 end
 
 post '/photos' do
-  photo = Photo.new(url: params[params[:method]], album_id: params[:album_id])
+  if request.referrer.match('/albums') && cookies[:photo_url]
+    photo_url = cookies.delete(:photo_url)
+  else
+    photo_url = params[params[:method]]
+  end
+
+  photo = Photo.new(url: photo_url, album_id: params[:album_id])
 
   if photo.save
     redirect "/albums/#{photo.album.id}"
