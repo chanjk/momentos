@@ -76,8 +76,18 @@ post '/albums' do
   end
 end
 
+post '/albums/new' do
+
+end
+
 post '/photos' do
-  
+  photo = Photo.new(url: params[params[:method]], album_id: params[:album_id])
+
+  if photo.save
+    redirect "/albums/#{photo.album.id}"
+  else
+    erb :photo_new
+  end
 end
 
 delete '/session' do

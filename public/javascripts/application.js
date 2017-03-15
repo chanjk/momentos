@@ -13,3 +13,14 @@ $('#choose-album-accordion input:radio').click(function(e) {
     $('#form-add-photo #btn-create-album').hide();
   }
 });
+
+$('#choose-existing').ready(function(e) {
+  $(this).find('li').first().addClass('active');
+  $(this).find('input:radio[name="album_id"]').first().prop('checked', true);
+});
+
+$('#choose-existing').on('click', 'li', function() {
+  $(this).parents().children('li').removeClass('active');
+  $(this).addClass('active');
+  $(this).children('input:radio').prop('checked', true);
+});
