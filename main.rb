@@ -170,3 +170,8 @@ delete '/session' do
   session.delete(:user_id)
   redirect '/'
 end
+
+delete '/photos/:id' do
+  photo = Photo.find(params[:id]).destroy
+  redirect "/albums/#{photo.album.id}"
+end

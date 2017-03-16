@@ -5,5 +5,8 @@
 </div>
 
 <% if current_user?(@photo.album.user) %>
-<button>Delete photo</button>
+<form class="" action="/photos/<%= @photo.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button class="btn btn-danger" role="button">Delete photo</button>
+</form>
 <% end %>
