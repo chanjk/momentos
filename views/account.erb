@@ -9,7 +9,7 @@
 
 <div class="row">
   <% @owner.albums.each do |album| %>
-  <div class="col-sm-6 col-md-4">
+  <div class="col-sm-4 col-md-4">
     <div class="thumbnail">
       <% if album.photos.first %>
       <img src="<%= album.photos.first.url %>" alt="">
@@ -19,12 +19,14 @@
       </div>
       <% end %>
       <div class="caption">
-        <h3><%= album.name %></h3>
-        <h4><%= album.description %></h4>
-        <a class="btn btn-primary" role="button" href="/albums/<%= album.id %>">View</a>
-        <% if current_user?(@owner) %>
-        <a class="btn btn-default" role="button" href="/albums/<%= album.id %>/edit">Edit</a>
-        <% end %>
+        <h4 class="text-center"><%= album.name %></h3>
+        <h5 class="text-center"><%= album.description %></h4>
+        <div class="text-center">
+          <a class="btn btn-primary" role="button" href="/albums/<%= album.id %>">View</a>
+          <% if current_user?(@owner) %>
+          <a class="btn btn-default" role="button" href="/albums/<%= album.id %>/edit">Edit</a>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

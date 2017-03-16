@@ -9,7 +9,10 @@
 </head>
 <body>
   <header>
-    <div class="h1 inline-block page-header">Momentos <small>Simple photo-sharing</small></div>
+    <a href="/">
+      <img src="/images/logo.png">
+      <h1 class="inline-block page-header">Momentos <span class="subtitle">Simple photo-sharing</span></h1>
+    </a>
     <form class="inline-block navbar-form" action="/search">
       <div class="input-group">
         <input type="text" class="form-control" name="q" placeholder="Search for user or album...">
@@ -31,6 +34,10 @@
   </header>
 
   <%= yield %>
+
+  <footer class="text-muted">
+    Momentos &copy; 2017 All rights reserved.
+  </footer>
 
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

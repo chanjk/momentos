@@ -8,15 +8,49 @@
 </div>
 <% end %>
 
-<div class="clearfix">
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<section>
+  <p class="lead">Momentos makes photo-sharing easy. Just create an account, make an album, and start adding photos! Best of all, it's free!</p>
   <div class="row">
-    <img class="img-responsive col-md-6" src="http://images.budgettravel.com/togoornot2013japanwater-1252013-234937_panoramic.jpeg" alt="">
-    <img class="img-responsive col-md-6" src="http://www.bucadibeppo.com/wp-content/uploads/2016/06/buca-spaghetti-birthday-cake.jpg" alt="">
+    <img class="img-responsive col-md-4 col-sm-4" src="/images/img_1a.jpeg" alt="">
+    <img class="img-responsive col-md-4 col-sm-4" src="/images/img_1b.jpeg" alt="">
+    <img class="img-responsive col-md-4 col-sm-4" src="/images/img_1c.jpeg" alt="">
   </div>
-</div>
+</section>
 
-<div>
-  Featured albums
-  <a href="/albums/1">Album</a>
-</div>
+<section>
+  <p class="lead">Share your photos in 3 easy steps.</p>
+  <div class="row">
+    <div class="col-md-4 col-sm-4">
+      <img class="img-responsive" src="/images/img_2a.jpeg" alt="">
+      <p class="text-center h5">1. Create an account</p>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <img class="img-responsive" src="/images/img_2b.jpeg" alt="">
+      <p class="text-center h5">2. Make an album</p>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <img class="img-responsive" src="/images/img_2c.jpeg" alt="">
+      <p class="text-center h5">3. Add photos!</p>
+    </div>
+  </div>
+</section>
+
+<% if !@albums_with_photos.empty? %>
+<section>
+  <p class="lead">Featured albums</p>
+  <div class="row">
+    <% [@albums_with_photos.count, 3].min.times do |i| %>
+    <a href="/albums/<%= @albums_with_photos[i].id %>">
+      <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+          <img src="<%= @albums_with_photos[i].photos.first.url %>" alt="">
+          <div class="caption">
+            <h4 class="text-center"><%= @albums_with_photos[i].name %></h4>
+          </div>
+        </div>
+      </div>
+    </a>
+    <% end %>
+  </div>
+</section>
+<% end %>

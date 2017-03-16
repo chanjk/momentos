@@ -51,6 +51,7 @@ end
 get '/' do
   @register_failed = (params[:register] == "fail")
   @reason = params[:reason] if @register_failed
+  @albums_with_photos = Album.all.select { |album| !album.photos.empty? }
   erb :index
 end
 
