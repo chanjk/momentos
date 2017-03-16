@@ -1,7 +1,7 @@
-require 'pry'
+# require 'pry'
 require 'sinatra'
 require 'sinatra/cookies'
-require 'sinatra/reloader'
+# require 'sinatra/reloader'
 
 require_relative 'database_config'
 require_relative 'models/album'
