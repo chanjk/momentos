@@ -1,4 +1,4 @@
-# require 'pry'
+require 'pry'
 require 'sinatra'
 require 'sinatra/cookies'
 require 'sinatra/reloader'
@@ -58,9 +58,7 @@ get '/photos/:id' do
   erb :photo
 end
 
-get '/users/:id/edit' do
-  @user = User.find(params[:id])
-  redirect "/users/#{@user.id}" unless current_user?(@user)
+get '/users/current/edit' do
   erb :account_edit
 end
 
@@ -138,8 +136,8 @@ post '/photos' do
   end
 end
 
-put '/users/:id' do
-  user = User.find(params[:id])
+put '/users' do
+  user = current_user
   current_password = params[:current_password]
   new_password = params[:new_password]
 
@@ -169,6 +167,11 @@ end
 delete '/session' do
   session.delete(:user_id)
   redirect '/'
+end
+
+delete '/users' do
+  current_user.destroy
+  redirect '/session', 307
 end
 
 delete '/albums/:id' do

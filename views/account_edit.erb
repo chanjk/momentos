@@ -1,11 +1,11 @@
 <h1>Edit Account</h1>
 
-<form id="form-edit-account" class="form-group has" action="/users/<%= @user.id %>" method="post">
+<form id="form-edit-account" class="form-group" action="/users" method="post">
   <input type="hidden" name="_method" value="put">
   <label class="required" for="">Email address</label>
-  <input class="form-control" type="text" name="email" value="<%= @user.email %>" placeholder="Email address" required>
+  <input class="form-control" type="text" name="email" value="<%= current_user.email %>" placeholder="Email address" required>
   <label for="">Full name</label>
-  <input class="form-control" type="text" name="full_name" value="<%= @user.full_name %>" placeholder="Full name">
+  <input class="form-control" type="text" name="full_name" value="<%= current_user.full_name %>" placeholder="Full name">
 
   <h4>Password</h4>
   <div id="current-password">
@@ -20,4 +20,9 @@
   </div>
 
   <button class="btn btn-primary pull-right">Update account</button>
+</form>
+<form class="has-error" action="/users" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button class="btn btn-danger">Delete account</button>
+  <div class="help-block inline-block">Warning: this action is irreversible!</div>
 </form>
