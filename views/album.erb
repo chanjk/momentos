@@ -3,7 +3,7 @@
 
 <% if current_user?(@album.user) %>
 <a class="btn btn-default" role="button" href="/photos/new?album_id=<%= @album.id %>">Add photo</a>
-<a>Edit</a>
+<a class="btn btn-default" role="button" href="/albums/<%= @album.id %>/edit">Edit</a>
 <% end %>
 
 <div class="photo-container">

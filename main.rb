@@ -39,7 +39,7 @@ get '/albums/new' do
 end
 
 get '/photos/new' do
-  @album = Album.find_by(id: params[:album_id])
+  @album = Album.find_by(id: params[:album_id], user_id: current_user.id)
   erb :photo_new
 end
 
@@ -56,6 +56,11 @@ end
 get '/photos/:id' do
   @photo = Photo.find(params[:id])
   erb :photo
+end
+
+get '/albums/:id/edit' do
+  @album = Album.find(params[:id])
+  erb :album_edit
 end
 
 post '/session' do
@@ -123,6 +128,18 @@ post '/photos' do
     redirect "/albums/#{photo.album.id}"
   else
     erb :photo_new
+  end
+end
+
+put '/albums/:id' do
+  album = Album.find(params[:id])
+  album.name = params[:name]
+  album.description = params[:description] unless params[:description].empty?
+
+  if album.save
+    redirect "/albums/#{params[:id]}"
+  else
+    redirect "/albums/#{params[:id]}/edit"
   end
 end
 
