@@ -1,7 +1,7 @@
-require 'pry'
+# require 'pry'
 require 'sinatra'
 require 'sinatra/cookies'
-require 'sinatra/reloader'
+# require 'sinatra/reloader'
 
 require_relative 'database_config'
 require_relative 'models/album'
@@ -66,7 +66,7 @@ get '/albums/new' do
 end
 
 get '/photos/new' do
-  @album = Album.find_by(id: params[:album_id], user_id: current_user.id)
+  @album = Album.find_by(id: params[:album_id], user_id: current_user.id) if logged_in?
   erb :photo_new
 end
 

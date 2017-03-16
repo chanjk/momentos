@@ -7,7 +7,7 @@ html {
 body {
   width: 80%;
   margin: 0 auto;
-  margin-bottom: 70px;
+  margin-bottom: 100px;
 }
 
 header {
@@ -31,6 +31,7 @@ footer {
   bottom: 0;
   width: 80%;
   height: 60px;
+  z-index: -1000;
 }
 
 .page-header {
