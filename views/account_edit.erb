@@ -1,0 +1,23 @@
+<h1>Edit Account</h1>
+
+<form id="form-edit-account" class="form-group has" action="/users/<%= @user.id %>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <label class="required" for="">Email address</label>
+  <input class="form-control" type="text" name="email" value="<%= @user.email %>" placeholder="Email address" required>
+  <label for="">Full name</label>
+  <input class="form-control" type="text" name="full_name" value="<%= @user.full_name %>" placeholder="Full name">
+
+  <h4>Password</h4>
+  <div id="current-password">
+    <label for="">Current password</label>
+    <input class="form-control" type="password" name="current_password" value="" placeholder="Current password">
+    <div class="help-block hidden">Please enter your current password.</div>
+  </div>
+  <div id="new-password">
+    <label for="">New password</label>
+    <input class="form-control" type="password" name="new_password" value="" placeholder="New password">
+    <div class="help-block hidden">Password cannot be blank.</div>
+  </div>
+
+  <button class="btn btn-primary pull-right">Update account</button>
+</form>

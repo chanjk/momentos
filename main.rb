@@ -58,8 +58,15 @@ get '/photos/:id' do
   erb :photo
 end
 
+get '/users/:id/edit' do
+  @user = User.find(params[:id])
+  redirect "/users/#{@user.id}" unless current_user?(@user)
+  erb :account_edit
+end
+
 get '/albums/:id/edit' do
   @album = Album.find(params[:id])
+  redirect "/albums/#{@album.id}" unless current_user?(@album.user)
   erb :album_edit
 end
 
@@ -131,15 +138,31 @@ post '/photos' do
   end
 end
 
+put '/users/:id' do
+  user = User.find(params[:id])
+  current_password = params[:current_password]
+  new_password = params[:new_password]
+
+  if ((current_password.empty? && new_password.empty?) || user.authenticate(current_password)) &&
+      (user.email == params[:email] || !User.find_by(email: params[:email]))
+    user.email = params[:email]
+    user.full_name = if params[:full_name].empty? then nil else params[:full_name] end
+    user.password = new_password
+    redirect "/users/#{user.id}" if user.save
+  end
+
+  redirect back
+end
+
 put '/albums/:id' do
   album = Album.find(params[:id])
   album.name = params[:name]
   album.description = params[:description] unless params[:description].empty?
 
   if album.save
-    redirect "/albums/#{params[:id]}"
+    redirect "/albums/#{album.id}"
   else
-    redirect "/albums/#{params[:id]}/edit"
+    redirect back
   end
 end
 

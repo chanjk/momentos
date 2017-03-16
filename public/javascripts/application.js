@@ -6,19 +6,19 @@ $('input:radio').click(function(e) {
 
 $('#choose-album-accordion').ready(function() {
   if ($(this).find('input:radio[data-target="#create-new"]').is(':checked')) {
-    $('#form-add-photo #btn-create-album').show();
+    $('#form-add-photo #btn-create-album').removeClass('hidden');
   } else {
-    $('#form-add-photo #btn-add-photo').show();
+    $('#form-add-photo #btn-add-photo').removeClass('hidden');
   }
 });
 
 $('#choose-album-accordion input:radio').click(function() {
   if ($(this).attr('data-target') === '#create-new') {
-    $('#form-add-photo #btn-add-photo').hide();
-    $('#form-add-photo #btn-create-album').show();
+    $('#form-add-photo #btn-add-photo').addClass('hidden');
+    $('#form-add-photo #btn-create-album').removeClass('hidden');
   } else {
-    $('#form-add-photo #btn-add-photo').show();
-    $('#form-add-photo #btn-create-album').hide();
+    $('#form-add-photo #btn-add-photo').removeClass('hidden');
+    $('#form-add-photo #btn-create-album').addClass('hidden');
   }
 });
 
@@ -34,4 +34,22 @@ $('#choose-existing').on('click', 'li', function() {
   $(this).parents().children('li').removeClass('active');
   $(this).addClass('active');
   $(this).children('input:radio').prop('checked', true);
+});
+
+$('#form-edit-account').submit(function() {
+  if ($('input[name="current_password"]').val() === "" && $('input[name="new_password"]').val() !== "") {
+    $('#current-password').addClass('has-error');
+    $('#current-password .help-block').removeClass('hidden');
+    $('#new-password').removeClass('has-error');
+    $('#new-password .help-block').addClass('hidden');
+    return false;
+  }
+
+  if ($('input[name="current_password"]').val() !== "" && $('input[name="new_password"]').val() === "") {
+    $('#current-password').removeClass('has-error');
+    $('#current-password .help-block').addClass('hidden');
+    $('#new-password').addClass('has-error');
+    $('#new-password .help-block').removeClass('hidden');
+    return false;
+  }
 });

@@ -1,6 +1,5 @@
 <h1>Edit <%= @album.name %></h1>
 
-<% if current_user?(@album.user) %>
 <form class="form-group" action="/albums/<%= @album.id %>" method="post">
   <input type="hidden" name="_method" value="put">
   <label class="required" for="">Name</label>
@@ -9,6 +8,3 @@
   <input class="form-control" type="text" name="description" value="<%= @album.description %>" placeholder="Album description">
   <button class="btn btn-primary pull-right">Update album</button>
 </form>
-<% else %>
-<div class="alert alert-danger" role="alert">This album does not belong to you!</div>
-<% end %>
