@@ -24,6 +24,26 @@ helpers do
   end
 end
 
+def log_in(user_id)
+  session[:user_id] = user_id
+  redirect "/users/#{user_id}"
+end
+
+def log_out
+  session.delete(:user_id)
+  redirect '/'
+end
+
+def add_photo(url, album_id)
+  photo = Photo.new(url: url, album_id: album_id)
+
+  if photo.save
+    redirect "/albums/#{photo.album.id}"
+  else
+    erb :photo_new
+  end
+end
+
 after do
   ActiveRecord::Base.connection.close
 end
@@ -32,6 +52,12 @@ get '/' do
   @register_failed = (params[:register] == "fail")
   @reason = params[:reason] if @register_failed
   erb :index
+end
+
+get '/search' do
+  @users = User.all
+  @albums = Album.all
+  erb :search
 end
 
 get '/albums/new' do
@@ -72,8 +98,7 @@ post '/session' do
   user = User.find_by(email: params[:email])
 
   if user && user.authenticate(params[:password])
-    session[:user_id] = user.id
-    redirect "/users/#{user.id}"
+    log_in(user.id)
   else
     redirect '/'
   end
@@ -86,7 +111,7 @@ post '/users' do
     user.password = params[:password]
 
     if user.save
-      redirect "/session?email=#{user.email}&password=#{user.password}", 307
+      log_in(user.id)
     else
       redirect '/?register=fail&reason=error'
     end
@@ -102,7 +127,7 @@ post '/albums' do
     if !cookies[:photo_url]
       redirect "/users/#{current_user.id}"
     else
-      redirect "/photos?album_id=#{album.id}", 307
+      add_photo(cookies.delete(:photo_url), album.id)
     end
   else
     erb :album_new
@@ -121,19 +146,7 @@ post '/albums/new' do
 end
 
 post '/photos' do
-  if request.referrer.match('/albums') && cookies[:photo_url]
-    photo_url = cookies.delete(:photo_url)
-  else
-    photo_url = params[params[:method]]
-  end
-
-  photo = Photo.new(url: photo_url, album_id: params[:album_id])
-
-  if photo.save
-    redirect "/albums/#{photo.album.id}"
-  else
-    erb :photo_new
-  end
+  add_photo(params[params[:method]], params[:album_id])
 end
 
 put '/users' do
@@ -165,13 +178,12 @@ put '/albums/:id' do
 end
 
 delete '/session' do
-  session.delete(:user_id)
-  redirect '/'
+  log_out
 end
 
 delete '/users' do
   current_user.destroy
-  redirect '/session', 307
+  log_out
 end
 
 delete '/albums/:id' do
