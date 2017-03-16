@@ -31,7 +31,7 @@ Complete RESTful routes (GET, POST, PUT and DELETE) are available for `User` and
 
 [Bootstrap](http://getbootstrap.com) is also used to reduce the work of styling the web pages.
 
-## Unsolved problems
+## Unresolved problems
 
 * The search bar currently lists all users and albums, and does not use the search term to filter the results.
 
