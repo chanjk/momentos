@@ -1,0 +1,12 @@
+<a class="btn btn-default" href="/albums/<%= @photo.album.id %>">Back to album</a>
+
+<div class="jumbotron">
+  <img class="img-responsive center-block" src=<%= @photo.url %> alt="">
+</div>
+
+<% if current_user?(@photo.album.user) %>
+<form class="" action="/photos/<%= @photo.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button class="btn btn-danger" role="button">Delete photo</button>
+</form>
+<% end %>

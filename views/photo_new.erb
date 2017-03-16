@@ -1,0 +1,14 @@
+<h1>Add a new photo</h1>
+<% if !logged_in? %>
+<div class="alert alert-danger" role="alert">Please log in to add a new photo.</div>
+<% else %>
+<form id="form-add-photo" class="form-group" method="post">
+  <%= erb :_add_photo_accordion %>
+
+  <h3>Choose album</h3>
+  <%= erb :_choose_album_accordion, locals: { current_album: @album } %>
+
+  <button id="btn-create-album" type="submit" class="btn btn-primary pull-right hidden" formaction="/albums/new">Create album</button>
+  <button id="btn-add-photo" type="submit" class="btn btn-primary pull-right hidden" formaction="/photos">Add photo</button>
+</form>
+<% end %>

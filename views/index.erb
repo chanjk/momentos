@@ -1,1 +1,56 @@
-<h1>hello world</h1>
+<% if @register_failed %>
+<div class="alert alert-danger" role="alert">
+  <% if @reason == "error" %>
+  Uh-oh, something went wrong. Please try again.
+  <% elsif @reason == "taken" %>
+  That email has already been taken. Please register with a different email.
+  <% end %>
+</div>
+<% end %>
+
+<section>
+  <p class="lead">Momentos makes photo-sharing easy. Just create an account, make an album, and start adding photos! Best of all, it's free!</p>
+  <div class="row">
+    <img class="img-responsive col-md-4 col-sm-4" src="/images/img_1a.jpeg" alt="">
+    <img class="img-responsive col-md-4 col-sm-4" src="/images/img_1b.jpeg" alt="">
+    <img class="img-responsive col-md-4 col-sm-4" src="/images/img_1c.jpeg" alt="">
+  </div>
+</section>
+
+<section>
+  <p class="lead">Share your photos in 3 easy steps.</p>
+  <div class="row">
+    <div class="col-md-4 col-sm-4">
+      <img class="img-responsive" src="/images/img_2a.jpeg" alt="">
+      <p class="text-center h5">1. Create an account</p>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <img class="img-responsive" src="/images/img_2b.jpeg" alt="">
+      <p class="text-center h5">2. Make an album</p>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <img class="img-responsive" src="/images/img_2c.jpeg" alt="">
+      <p class="text-center h5">3. Add photos!</p>
+    </div>
+  </div>
+</section>
+
+<% if !@albums_with_photos.empty? %>
+<section>
+  <p class="lead">Featured albums</p>
+  <div class="row">
+    <% [@albums_with_photos.count, 3].min.times do |i| %>
+    <a href="/albums/<%= @albums_with_photos[i].id %>">
+      <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+          <img src="<%= @albums_with_photos[i].photos.first.url %>" alt="">
+          <div class="caption">
+            <h4 class="text-center"><%= @albums_with_photos[i].name %></h4>
+          </div>
+        </div>
+      </div>
+    </a>
+    <% end %>
+  </div>
+</section>
+<% end %>

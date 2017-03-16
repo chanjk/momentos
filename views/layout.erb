@@ -1,12 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Hello World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Momentos</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel='stylesheet' href='/stylesheets/main.css'>
 </head>
 <body>
+  <header>
+    <a href="/">
+      <img src="/images/logo.png">
+      <h1 class="inline-block page-header">Momentos <span class="subtitle">Simple photo-sharing</span></h1>
+    </a>
+    <form class="inline-block navbar-form" action="/search">
+      <div class="input-group">
+        <input type="text" class="form-control" name="q" placeholder="Search for user or album...">
+        <span class="input-group-btn">
+          <button class="btn btn-default">Search</button>
+        </span>
+      </div>
+    </form>
+
+    <% if !logged_in? %>
+    <%= erb :_login_register_accordion %>
+    <% else %>
+    <span><a href="/users/<%= current_user.id %>"><%= current_user.username %></a></span>
+    <form class="inline-block" action="/session" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button class="btn btn-primary">Log out</button>
+    </form>
+    <% end %>
+  </header>
 
   <%= yield %>
 
+  <footer class="text-muted">
+    Momentos &copy; 2017 All rights reserved.
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="/javascripts/application.js"></script>
 </body>

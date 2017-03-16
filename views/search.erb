@@ -1,0 +1,28 @@
+<h3>Users</h3>
+<% @users.each do |user| %>
+<div>
+  <a href="/users/<%= user.id %>"><%= user.username %></a>
+  <span>(albums: <%= user.albums.count %>)</span>
+</div>
+<% end %>
+
+<h3>Albums</h3>
+<% @albums.each do |album| %>
+<a href="/albums/<%= album.id %>">
+  <div class="col-sm-4 col-md-4">
+    <div class="thumbnail">
+      <% if album.photos.first %>
+      <img src="<%= album.photos.first.url %>" alt="">
+      <% else %>
+      <div class="alert alert-info h5" role="alert">
+        No photos here!
+      </div>
+      <% end %>
+      <div class="caption">
+        <h4 class="text-center"><%= album.name %></h3>
+        <h5 class="text-center"><%= album.description %></h4>
+      </div>
+    </div>
+  </div>
+</a>
+<% end %>

@@ -1,0 +1,13 @@
+<h1><%= @album.name %><%= " <small>by <a href=\"/users/#{@album.user.id}\">#{@album.user.username}</a></small>" if !current_user?(@album.user) %></h1>
+<h4><%= @album.description %></h4>
+
+<% if current_user?(@album.user) %>
+<a class="btn btn-default" role="button" href="/photos/new?album_id=<%= @album.id %>">Add photo</a>
+<a class="btn btn-default" role="button" href="/albums/<%= @album.id %>/edit">Edit</a>
+<% end %>
+
+<div class="photo-container">
+  <% @album.photos.each do |photo| %>
+  <a href="/photos/<%= photo.id %>"><img class="img-responsive col-md-4 col-xs" src=<%= photo.url %> alt=""></a>
+  <% end %>
+</div>
