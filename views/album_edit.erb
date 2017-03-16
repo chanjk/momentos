@@ -1,3 +1,5 @@
+<a class="btn btn-default" href="/albums/<%= @album.id %>">Back to album</a>
+
 <h1>Edit <%= @album.name %></h1>
 
 <form class="form-group" action="/albums/<%= @album.id %>" method="post">
@@ -7,4 +9,8 @@
   <label for="">Description</label>
   <input class="form-control" type="text" name="description" value="<%= @album.description %>" placeholder="Album description">
   <button class="btn btn-primary pull-right">Update album</button>
+</form>
+<form class="" action="/albums/<%= @album.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button class="btn btn-danger">Delete album</button>
 </form>

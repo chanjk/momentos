@@ -1,7 +1,7 @@
 # require 'pry'
 require 'sinatra'
 require 'sinatra/cookies'
-# require 'sinatra/reloader'
+require 'sinatra/reloader'
 
 require_relative 'database_config'
 require_relative 'models/album'
@@ -169,6 +169,11 @@ end
 delete '/session' do
   session.delete(:user_id)
   redirect '/'
+end
+
+delete '/albums/:id' do
+  album = Album.find(params[:id]).destroy
+  redirect "users/#{album.user.id}"
 end
 
 delete '/photos/:id' do
